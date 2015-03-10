@@ -15,7 +15,7 @@ function profSubmit() {
 }
 
 function init() {
-	writeResponse("init");
+	//writeResponse("init");
 	
 	//if (isFirstTime == "yes") {
 		//alert("first time");
@@ -32,9 +32,17 @@ function stopClass() {
 	socket.send("stop");
 }
 
+function doorClose() {
+	socket.send("close");
+}
+
+function doorClose() {
+	socket.send("open");
+}
+
 function clearNotes() {
 	document.getElementById("submitNotes").reset();
-	socket.send("clear");
+	socket.send("");
 }
 
 function writeResponse(text) {

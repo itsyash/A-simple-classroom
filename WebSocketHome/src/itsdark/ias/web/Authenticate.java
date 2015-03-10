@@ -119,15 +119,15 @@ public class Authenticate {
 					.split("=")[1];
 			System.out.println("phpSessID : " + phpSessID);
 			// print_marks(newConnection);
-			newConnection.disconnect();
+			//newConnection.disconnect();
 
-//			String marksUrl = "http://courses.iiit.ac.in/EdgeNet/marks.php?select=1329&page=0";
-//			myURL = new URL(marksUrl);
-//			newConnection = (HttpURLConnection) myURL.openConnection();
-//			newConnection
-//					.setRequestProperty("Cookie", "PHPSESSID=" + phpSessID);
-//			newConnection.setRequestProperty("Host", "courses.iiit.ac.in");
-//			print_marks(newConnection);
+			String marksUrl = "http://courses.iiit.ac.in/EdgeNet/marks.php?select=1329&page=0";
+			myURL = new URL(marksUrl);
+			newConnection = (HttpURLConnection) myURL.openConnection();
+			newConnection
+					.setRequestProperty("Cookie", "PHPSESSID=" + phpSessID);
+			newConnection.setRequestProperty("Host", "courses.iiit.ac.in");
+			print_marks(newConnection);
 		} catch (IOException | KeyManagementException
 				| NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block

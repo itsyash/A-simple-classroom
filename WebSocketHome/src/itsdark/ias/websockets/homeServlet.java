@@ -1,5 +1,7 @@
 package itsdark.ias.websockets;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -61,7 +63,33 @@ public class homeServlet extends HttpServlet {
 			}
 		}
 		// authenticate student here
-		boolean authenticate = true;
+		boolean authenticate = false;
+		BufferedReader br = null;
+
+		try {
+
+			String sCurrentLine;
+
+			br = new BufferedReader(new FileReader(getServletContext()
+					.getRealPath("/WEB-INF/students.txt")));
+
+			while ((sCurrentLine = br.readLine()) != null) {
+				//System.out.println(sCurrentLine + " " + username);
+				if (sCurrentLine.equals(username))
+					authenticate = true;
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+
 		if (authenticate) {
 			if (Globals.classGoing) {
 				getServletContext()
@@ -72,13 +100,13 @@ public class homeServlet extends HttpServlet {
 
 				PrintWriter out = response.getWriter();
 				try {
-					
+
 					out.println("<html>");
 					out.println("<head>");
-					out.println("<title>Class Not going on</title>");
+					out.println("<title>The door is closed</title>");
 					out.println("</head>");
 					out.println("<body>");
-					out.println("<p>Class Not going on</p>");
+					out.println("<p>Class The door is closed</p>");
 					out.println("</body>");
 					out.println("</html>");
 				} finally {
@@ -95,5 +123,4 @@ public class homeServlet extends HttpServlet {
 			return;
 		}
 	}
-
 }

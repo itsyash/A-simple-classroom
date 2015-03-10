@@ -17,16 +17,16 @@
 		<p>Welcome to the Class.</p>
 		<br />
 		<div id="content">
-			<button onclick="startClass()">Start Class</button>
-			&nbsp;&nbsp;&nbsp;
-			<button onclick="stopClass()">Stop Class</button>
+			<button onclick="doorClose()">Close the door</button>
+			<button onclick="doorOpen()">Open the door</button>
+			<button onclick="stopClass()">Stop the class</button>
 			<form id="submitNotes">
 				<h3>Write some notes</h3>
 				<textarea name="description" id="notes" rows="10"
-					cols="50" onkeypress="profSubmit()"></textarea>
-				<input type="button" class="button" value="Submit"
-					onclick=profSubmit()> <input type="reset" class="button"
+					cols="50" onkeyup="profSubmit()"></textarea>
+				<input type="reset" class="button"
 					value="Clear Notes" onclick=clearNotes()>
+					
 			</form>
 		</div>
 		<br />

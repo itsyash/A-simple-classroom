@@ -45,8 +45,18 @@ public class Server {
 		System.out.println("in handle message");
 		if (message.equalsIgnoreCase("start")) {
 			Globals.classGoing = true;
-		} else if (message.equalsIgnoreCase("stop")) {
+
+		} else if (message.equalsIgnoreCase("close")) {
 			Globals.classGoing = false;
+		} else if (message.equalsIgnoreCase("open")) {
+			Globals.classGoing = true;
+		} else if (message.equalsIgnoreCase("stop")) {
+			try {
+				session.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			sendToAllConnectedSessions(session, message);
 		}
@@ -54,9 +64,7 @@ public class Server {
 
 	private void sendToAllConnectedSessions(Session current, String message) {
 		for (Session session : sessions) {
-			if (current.equals(session)) {
-
-			} else {
+			if (!current.equals(session)) {
 				sendToSession(session, message);
 			}
 		}
@@ -64,7 +72,10 @@ public class Server {
 
 	private void sendToSession(Session session, String message) {
 		try {
-			session.getBasicRemote().sendText(message);
+			if (message.isEmpty())
+				session.getBasicRemote().sendText(" ");
+			else
+				session.getBasicRemote().sendText(message);
 		} catch (IOException ex) {
 			sessions.remove(session);
 			Logger.getLogger(Server.class.getName())
